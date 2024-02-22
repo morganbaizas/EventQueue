@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using "interactionLogic.cs";
 
 public class zombieBehavior : MonoBehaviour
 {
+
+    int CPZ = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,10 +17,14 @@ public class zombieBehavior : MonoBehaviour
     void Update()
     {
         
+        if (CPZ == 7) {
+            Destroy(gameObject);
+        }
+        // transform.position = new Vector2(10, 0);
     }
 
     void OnMouseDown() {
-        x++;
-        Debug.Log(x);
+        CPZ++;
+        Debug.Log(CPZ);
     }
 }
