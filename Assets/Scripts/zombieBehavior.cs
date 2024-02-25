@@ -7,46 +7,19 @@ using UnityEditor;
 public class SpriteController : MonoBehaviour
 {
     private int clicks = 5;
-    private int kills = 0;
     private int currentClicks = 0;
-    private Queue<Action> eventQueue = new Queue<Action>();
 
     void Start()
     {
-        // Subscribe to mouse down events
-        EventManager.OnMouseDown += OnMouseDown;
-
-        // Check for kills event
-        EnqueueEvent(CheckKills);
-    }
-
-    void OnDestroy()
-    {
-        // Unsubscribe from mouse click events
-        EventManager.OnMouseDown -= OnMouseDown;
+        
     }
 
     void Update()
     {
-        // Process events in the queue
-        ProcessEvents();
-        CheckKills();
         transform.position += transform.right * 0.5f * Time.deltaTime;
-    }
-
-    // Method to enqueue events
-    private void EnqueueEvent(Action action)
-    {
-        eventQueue.Enqueue(action);
-    }
-
-    // Method to process events in the queue
-    private void ProcessEvents()
-    {
-        while (eventQueue.Count > 0)
+        if (transform.position.x > 0.65)
         {
-            Action action = eventQueue.Dequeue();
-            action();
+            Manager.Instance.getEventQueue().EnqueueEvent(EndGame);
         }
     }
 
@@ -62,36 +35,16 @@ public class SpriteController : MonoBehaviour
         {
             // Increment kills
             Destroy(gameObject);
-            kills++;
-            Debug.Log(kills);
+            Manager.Instance.setKill();
+            Debug.Log(Manager.Instance.getKill());
 
             // Reset currentClicks
             currentClicks = 0;
-
-            // Add event to check for kills
-            EnqueueEvent(CheckKills);
         }
     }
 
-    // Method to check for kills
-    private void CheckKills()
+    public void EndGame()
     {
-        if (kills == 2)
-        {
-            // Quit the application if kills equals 15
-            UnityEditor.EditorApplication.isPlaying = false;
-            Debug.Log("doing ur mom!");
-        }
-    }
-}
-
-// Event manager to handle mouse click events
-public static class EventManager
-{
-    public static event Action OnMouseDown;
-
-    public static void NotifyMouseDown()
-    {
-        OnMouseDown?.Invoke();
+        UnityEditor.EditorApplication.isPlaying = false;    
     }
 }
