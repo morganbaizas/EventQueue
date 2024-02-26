@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine.UIElements;
 using UnityEditor;
 
-public class SpriteController : MonoBehaviour
+public class SpriteController : SpriteControllerAbstract
 {
-    private int clicks = 5;
+    public int clicks = 5;
     private int currentClicks = 0;
 
     void Start()
@@ -24,19 +24,19 @@ public class SpriteController : MonoBehaviour
     }
 
     // Method to handle mouse click events
-    private void OnMouseDown()
+    public override void OnMouseDown()
     {
         // Increment clicks and currentClicks
         currentClicks++;
-        Debug.Log(currentClicks);
+        Debug.Log("CURRENT CLICKS: " + currentClicks);
 
         // Check if 5 clicks have occurred
-        if (currentClicks % 5 == 0)
+        if (currentClicks % clicks == 0)
         {
             // Increment kills
             Destroy(gameObject);
             Manager.Instance.setKill();
-            Debug.Log(Manager.Instance.getKill());
+            Debug.Log("KILLS: " + Manager.Instance.getKill());
 
             // Reset currentClicks
             currentClicks = 0;

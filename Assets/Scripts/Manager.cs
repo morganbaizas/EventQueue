@@ -23,6 +23,7 @@ public class Manager : MonoBehaviour {
     {
         eq = GameObject.Find("EventQueue").GetComponent<EventQueue>();
         InvokeRepeating(nameof(spawnZombies), 0.3f, 1.5f);
+        //InvokeRepeating("MainApp.Main()", 0.3f, 1.5f);
         CheckKills();
     }
 
@@ -45,6 +46,7 @@ public class Manager : MonoBehaviour {
     {
         Instantiate(zombie, zombieSpawnPos.position, Quaternion.identity);
         Debug.Log("zombies spawning");
+        // MainApp.Main();
     }
 
     private void CheckKills()
