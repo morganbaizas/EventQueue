@@ -23,22 +23,17 @@ public class SpriteController : SpriteControllerAbstract
         }
     }
 
-    // Method to handle mouse click events
     public override void OnMouseDown()
     {
-        // Increment clicks and currentClicks
         currentClicks++;
         Debug.Log("CURRENT CLICKS: " + currentClicks);
 
-        // Check if 5 clicks have occurred
         if (currentClicks % clicks == 0)
         {
-            // Increment kills
             Destroy(gameObject);
             Manager.Instance.setKill();
             Debug.Log("KILLS: " + Manager.Instance.getKill());
 
-            // Reset currentClicks
             currentClicks = 0;
         }
     }

@@ -7,7 +7,6 @@ public class EventQueue : MonoBehaviour
     private Queue<System.Action> eventQueue = new Queue<System.Action>();
     public void Start () 
     {
-        // Subscribe to mouse down events
         // EventManager.OnMouseDown += OnMouseDown;
     }
 

@@ -6,15 +6,12 @@ public class soldierBehavior : MonoBehaviour
     public Sprite sprite;
     private SpriteRenderer sr;
     private Manager manager;
-
-    // Start is called before the first frame update
     void Start()
     {
         manager = Manager.Instance;
         sr = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (manager.getKill() == 2) {

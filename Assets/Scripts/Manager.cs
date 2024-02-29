@@ -61,10 +61,7 @@ public class Manager : MonoBehaviour {
     }
     public IEnumerator DelayedFunctionCall(float delayInSeconds, System.Action func)
     {
-        // Wait for the specified delay
         yield return new WaitForSeconds(delayInSeconds);
-
-        // Call your function here
         getEventQueue().EnqueueEvent(func);
     }
 }
